@@ -1,28 +1,45 @@
-Cljotp
-======
+Cljbcrypt
+=========
 
-[![Build Status](https://secure.travis-ci.org/omarkj/cljotp.png)](https://travis-ci.org/omarkj/cljotp)
+[![Build Status](https://secure.travis-ci.org/omarkj/cljbcrypt.png)](https://travis-ci.org/omarkj/cljbcrypt)
 
-Generate one time passwords, [HOTP](http://en.wikipedia.org/wiki/HOTP)s and
-[TOTP](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm)s for 
-your application. Should work with the Google Authenticator.
+Thin wrapper for [jBCrypt](http://www.mindrot.org/projects/jBCrypt/) in Clojure.
 
 Clojure API
 -----------
 
-Get a HTOP based on a interval number
+### Create a salt
 
 ``` clojure
-(get-hotp secret interval)
+(gen-salt)
+(gen-salt byte-lengt)
 ```
 
-Get a TOTP based on the time
+Returns a salt as a string.
+
+### Hash password
 
 ``` clojure
-(get-totp secret)
+(hash-password password salt)
 ```
 
-The secret needs to be a base32 encoded secret key!
+Returns the hashed password as a string.
+
+### Check password
+
+``` cljoure
+(check-password password hashed-password)
+```
+
+Returns true or false.
+
+### Create password
+
+``` clojure
+(create-password password)
+```
+
+Returns a `hash-map` with `password` and `salt`.
 
 Licence
 -------
